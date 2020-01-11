@@ -10,4 +10,4 @@ jobs:
         uses: actions/checkout@v1
       - name: Check Dependency Versions
         if: github.event.client_payload.runtest == true
-        run: ./scripts/test
+        run: ./runtest.sh

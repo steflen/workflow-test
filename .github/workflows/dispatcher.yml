@@ -1,10 +1,9 @@
 name: Test Dispatch
 on:
   repository_dispatch:
-    types: do-something
+    types: [do-something]
 jobs:
-  build:
-    name: Test Remote Dispatch Functionality
+  do-something:
     runs-on: ubuntu-latest
     steps:
       - name: Doing Tests

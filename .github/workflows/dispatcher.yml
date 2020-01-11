@@ -1,15 +1,16 @@
 name: Test Dispatch
 on:
   repository_dispatch:
+    # can be multiple types to dispatch ...
     types: [do-something]
 jobs:
   do-something:
     runs-on: ubuntu-latest
     steps:
-      - name: Doing Tests
+      - name: Start test
         run: echo Test is running
-      - name: Data sent
-        run: 'echo "Data sent: ${{ github.event.client_payload.runtest }}"'
-      - name: Check Dependency Versions
+      - name: Payload check
+        run: 'echo "Payload from message: ${{ github.event.client_payload.runtest }}"'
+      - name: Do something conditional
         if: github.event.client_payload.runtest == true
-        run: ./runtest.sh
+        run: ./github/runtest.sh

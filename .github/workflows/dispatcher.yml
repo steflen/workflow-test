@@ -1,13 +1,16 @@
 name: Test Dispatch
 on:
   repository_dispatch:
+    types: do-something
 jobs:
   build:
     name: Test Remote Dispatch Functionality
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout
-        uses: actions/checkout@v1
+      - name: Doing Tests
+        run: echo Test is running
+      - name: Data sent
+        run: 'echo "Data sent: ${{ github.event.client_payload.runtest }}"'
       - name: Check Dependency Versions
         if: github.event.client_payload.runtest == true
         run: ./runtest.sh

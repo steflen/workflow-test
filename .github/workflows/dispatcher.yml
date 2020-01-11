@@ -1,15 +1,13 @@
 name: Test Dispatch
 on:
   repository_dispatch:
-    types: deploy
 jobs:
-  build_and_deploy:
-    name: Build & Deploy
+  build:
+    name: Test Remote Dispatch Functionality
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v1
-      - name: Build & Deploy to GitHub Pages
-        with:
-          REMOTE_BRANCH: gh-pages
-          GITHUB_TOKEN: ${{ secrets.GH_TOKEN }}
-        uses: yurikoval/middleman-gh-pages-action@master
+      - name: Checkout
+        uses: actions/checkout@v1
+      - name: Check Dependency Versions
+        if: github.event.client_payload.runtest == true
+        run: ./scripts/test
